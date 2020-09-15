@@ -4,8 +4,9 @@ const MODERN_CONFIG = "modern";
 
 // node modules
 const glob = require("glob-all");
-const { merge } = require('webpack-merge');
 const path = require("path");
+const fs = require('fs');
+const { merge } = require('webpack-merge');
 const webpack = require("webpack");
 
 // webpack plugins
@@ -21,7 +22,17 @@ const zopfli = require("@gfx/zopfli");
 
 // config files
 const common = require("./webpack.common.js");
-const settings = require("./webpack.settings.js");
+
+let settings = require("./webpack.settings.js");
+if (fs.existsSync(path.resolve(process.cwd(), './webpack.settings.js'))) {
+  let projectSettings = require(path.resolve(process.cwd(), './webpack.settings.js'));
+  settings = merge(settings, projectSettings);
+}
+
+let projectConfig = {};
+if (fs.existsSync(path.resolve(process.cwd(), 'webpack.config.js'))) {
+  projectConfig = require(path.resolve(process.cwd(), 'webpack.config.js'));
+}
 
 // Clean build assets before continuing
 rimraf(path.resolve(settings.paths.working, settings.paths.dist.base), {}, () =>
@@ -283,7 +294,7 @@ module.exports = [
       new PurgecssPlugin(configurePurgeCss()),
       new CompressionPlugin(configureCompression()),
     ],
-  }),
+  }, projectConfig),
   merge(common.modernConfig, {
     output: {
       filename: path.join("./js", "[name].[chunkhash].js"),
@@ -302,5 +313,5 @@ module.exports = [
       new ImageminWebpWebpackPlugin(),
       new CompressionPlugin(configureCompression()),
     ],
-  }),
+  }, projectConfig),
 ];

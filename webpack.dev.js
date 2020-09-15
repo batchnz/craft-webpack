@@ -5,10 +5,16 @@ const MODERN_CONFIG = "modern";
 // node modules
 const { merge } = require("webpack-merge");
 const path = require("path");
+const fs = require("fs");
 const webpack = require("webpack");
 // config files
 const common = require("./webpack.common.js");
 const settings = require("./webpack.settings.js");
+
+let projectConfig = {};
+if (fs.existsSync(path.resolve(process.cwd(), 'webpack.config.js'))) {
+  projectConfig = require(path.resolve(process.cwd(), 'webpack.config.js'));
+}
 
 // Configure the webpack-dev-server
 const configureDevServer = (buildType) => {
@@ -143,7 +149,7 @@ module.exports = [
       ],
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
-  }),
+  }, projectConfig),
   merge(common.modernConfig, {
     output: {
       filename: path.join("./js", "[name].[hash].js"),
@@ -160,5 +166,5 @@ module.exports = [
       ],
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
-  }),
+  }, projectConfig),
 ];

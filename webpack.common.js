@@ -4,7 +4,8 @@ const MODERN_CONFIG = "modern";
 
 // node modules
 const path = require("path");
-const { mergeWithCustomize, customizeObject } = require('webpack-merge');
+const fs = require("fs");
+const { merge, mergeWithCustomize, customizeObject } = require('webpack-merge');
 
 // webpack plugins
 const ManifestPlugin = require("webpack-manifest-plugin");
@@ -13,7 +14,11 @@ const WebpackNotifierPlugin = require("webpack-notifier");
 
 // config files
 const pkg = require("./package.json");
-const settings = require("./webpack.settings.js");
+let settings = require("./webpack.settings.js");
+if (fs.existsSync(path.resolve(process.cwd(), './webpack.settings.js'))) {
+  let projectSettings = require(path.resolve(process.cwd(), './webpack.settings.js'));
+  settings = merge(settings, projectSettings);
+}
 
 // Configure Babel loader
 const configureBabelLoader = (browserList) => {

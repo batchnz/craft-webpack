@@ -21,9 +21,9 @@ A Craft Specific Tailwind/Vue Webpack Configuration with:
 
 `yarn add/npm install @batch/craft-webpack`
 
-## Scripts
+### Scripts
 
-First, add the scripts to your project's package.json
+Add the build scripts to your project's package.json
 
 ```json
   "scripts": {
@@ -45,3 +45,42 @@ Run the development pipeline, it will create a local webserver using webpack-dev
 `npm run/yarn dev`
 
 If want to use the legacy or combined build types during development, you use the`dev-modern` or `dev-combined` tasks
+
+## Configuration
+
+**Settings**
+
+The settings in webpack.settings.js can be overridden at a project level by placing a webpack.settings.js file in the project root. This will be merged with the base webpack.settings.js file during build.
+
+eg.
+
+```javascript
+module.exports = {
+    paths: {
+        src: {
+            base: "./resources/",
+            css: "./resources/css/",
+            js: "./resources/js/"
+        }
+    }
+};
+```
+
+**Webpack Config**
+
+Any custom Webpack config can be included by adding a webpack.config.js in the project root. This will be merged with the final Webpack config during build.
+
+eg. 
+
+```javascript
+const path = require("path");
+
+module.exports = {
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src/vue/")
+    }
+  }
+};
+```
+

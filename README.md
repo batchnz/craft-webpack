@@ -84,3 +84,8 @@ module.exports = {
 };
 ```
 
+**Source Maps**
+
+Out of the box, source maps are generated using webpack's "eval-source-map" devtool, which provides a "true" source map to the original code which makes debugging using breakpoints straightforward.
+
+Other [devtools for webpack](https://webpack.js.org/configuration/devtool) are available which have different performance and accuracy characteristics. You can easily override the chosen devtool by adding a `devtool` option to your webpack.config.js overrides.

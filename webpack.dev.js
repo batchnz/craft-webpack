@@ -139,7 +139,7 @@ module.exports = [
       publicPath: settings.devServerConfig.public() + "/",
     },
     mode: "development",
-    devtool: "cheap-source-map",
+    devtool: "eval-source-map",
     devServer: configureDevServer(LEGACY_CONFIG),
     module: {
       rules: [
@@ -156,7 +156,7 @@ module.exports = [
       publicPath: settings.devServerConfig.public() + "/",
     },
     mode: "development",
-    devtool: "cheap-source-map",
+    devtool: "eval-source-map",
     devServer: configureDevServer(MODERN_CONFIG),
     module: {
       rules: [

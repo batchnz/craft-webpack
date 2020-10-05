@@ -30,7 +30,8 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-  * [Built With](#built-with)
+  * [Made For](#made-for)
+  * [Features](#features)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
@@ -143,7 +144,7 @@ module.exports = {
 
 Any custom Webpack config can be included by adding a webpack.config.js in the project root. This will be merged with the final Webpack config during build.
 
-eg. 
+eg.
 
 ```javascript
 const path = require("path");

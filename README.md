@@ -213,4 +213,4 @@ Project Link: [https://github.com/batchnz/craft-webpack](https://github.com/batc
 [license-url]: https://github.com/batchnz/craft-webpack/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/company/batchnz/
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/screenshot.jpg

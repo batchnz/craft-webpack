@@ -15,9 +15,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const WhitelisterPlugin = require("purgecss-whitelister");
 const zopfli = require("@gfx/zopfli");
 
 // config files
@@ -38,14 +36,6 @@ if (fs.existsSync(path.resolve(process.cwd(), 'webpack.config.js'))) {
 rimraf(path.resolve(settings.paths.working, settings.paths.dist.base), {}, () =>
   console.log("\n\nRemoved all previous build assets.\n")
 );
-
-// Custom PurgeCSS extractor for Tailwind that allows special characters in
-// class names.
-//
-// https://github.com/FullHuman/purgecss#extractor
-const TailwindExtractor = (content) => {
-    return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
-}
 
 // Configure Compression webpack plugin
 const configureCompression = () => {
@@ -240,27 +230,6 @@ const configurePostcssLoader = (buildType) => {
   }
 };
 
-// Configure PurgeCSS
-const configurePurgeCss = () => {
-  let paths = [];
-  // Configure whitelist paths
-  for (const [key, value] of Object.entries(settings.purgeCssConfig.paths)) {
-    paths.push(path.join(settings.paths.working, value));
-  }
-
-  return {
-    paths: glob.sync(paths),
-    whitelist: WhitelisterPlugin(settings.purgeCssConfig.whitelist),
-    whitelistPatterns: settings.purgeCssConfig.whitelistPatterns,
-    extractors: [
-      {
-        extractor: TailwindExtractor,
-        extensions: settings.purgeCssConfig.extensions,
-      },
-    ],
-  };
-};
-
 // Configure terser
 const configureTerser = () => {
   return {
@@ -291,7 +260,6 @@ module.exports = [
         path: path.resolve(settings.paths.working, settings.paths.dist.base),
         filename: path.join("./css", "[name].[chunkhash].css"),
       }),
-      new PurgecssPlugin(configurePurgeCss()),
       new CompressionPlugin(configureCompression()),
     ],
   }, projectConfig),

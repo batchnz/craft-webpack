@@ -43,10 +43,4 @@ module.exports = {
   manifestConfig: {
     basePath: "",
   },
-  purgeCssConfig: {
-    paths: ["./templates/**/*.{twig,html}", "./src/vue/**/*.{vue,html}"],
-    whitelist: ["./src/css/components/**/*.{css}"],
-    whitelistPatterns: [],
-    extensions: ["html", "js", "twig", "vue"],
-  },
 };

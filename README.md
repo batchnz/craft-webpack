@@ -55,7 +55,6 @@ We've tailored this package to our own requirements based on developing a multit
 
 * Craft CMS (with Twigpack)
 * VueJS
-* Tailwind CSS
 
 ### Features
 
@@ -63,7 +62,6 @@ We've tailored this package to our own requirements based on developing a multit
 * [Core JS 3](https://github.com/zloirock/core-js)
 * [Vue Loader](https://vue-loader.vuejs.org/)
 * [Post CSS](https://postcss.org/)
-* [Purge CSS](https://purgecss.com/)
 * Manifest Configuration for use with [Twigpack](https://github.com/nystudio107/craft-twigpack)
 * [State Preserving Hot Reload](https://vue-loader.vuejs.org/guide/hot-reload.html)
 * Build and Development Pipelines
@@ -88,7 +86,7 @@ npm install @batch/craft-webpack -D
 ```json
   "scripts": {
     "dev": "webpack-dev-server --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.dev.js",
-    "build": "webpack --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.prod.js",
+    "build": "NODE_ENV=production && webpack --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.prod.js",
     "dev-legacy": "webpack-dev-server --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.dev.js --env.BUILD_TYPE=legacy",
     "dev-combined": "webpack-dev-server --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.dev.js --env.BUILD_TYPE=combined"
   }
@@ -114,7 +112,7 @@ If you want to use the legacy or combined build types during development, you us
 
 ### Production
 
-Runs the production pipeline. This will purge CSS and compress the build artifacts ready for sites in production.
+Runs the production pipeline. This will compress the build artifacts ready for sites in production.
 
 ```sh
 npm run build

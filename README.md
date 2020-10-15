@@ -86,7 +86,7 @@ npm install @batch/craft-webpack -D
 ```json
   "scripts": {
     "dev": "webpack-dev-server --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.dev.js",
-    "build": "NODE_ENV=production && webpack --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.prod.js",
+    "build": "export NODE_ENV=production && webpack --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.prod.js",
     "dev-legacy": "webpack-dev-server --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.dev.js --env.BUILD_TYPE=legacy",
     "dev-combined": "webpack-dev-server --progress --hide-modules --config=node_modules/@batch/craft-webpack/webpack.dev.js --env.BUILD_TYPE=combined"
   }

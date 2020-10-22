@@ -44,7 +44,7 @@ const configureImageLoader = (buildType) => {
     test: /\.(png|jpe?g|gif|webp)$/i,
     use: [
       {
-        loader: "file-loader",
+        loader: require.resolve("file-loader"),
         options: {
           name: "img/[name].[hash].[ext]",
         },
@@ -61,11 +61,11 @@ const configureSVGLoader = () => {
       {
         oneOf: [
           {
-            loader: "vue-svg-loader",
+            loader: "vuerequire.resolve(-svg-loader"),
           },
           {
             resourceQuery: /^\?external/,
-            loader: "file-loader",
+            loader: require.resolve("file-loader"),
             options: {
               name: "img/[name].[hash].[ext]",
             },
@@ -82,23 +82,23 @@ const configurePostcssLoader = (buildType) => {
     test: /\.(pcss|css)$/,
     use: [
       {
-        loader: "style-loader",
+        loader: require.resolve("style-loader"),
       },
       {
-        loader: "vue-style-loader",
+        loader: "vuerequire.resolve(-style-loader"),
       },
       {
-        loader: "css-loader",
+        loader: require.resolve("css-loader"),
         options: {
           importLoaders: 2,
           sourceMap: true,
         },
       },
       {
-        loader: "resolve-url-loader",
+        loader: "resolverequire.resolve(-url-loader"),
       },
       {
-        loader: "postcss-loader",
+        loader: require.resolve("postcss-loader"),
         options: {
           sourceMap: true,
         },

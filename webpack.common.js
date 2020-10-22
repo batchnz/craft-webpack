@@ -26,7 +26,7 @@ const configureBabelLoader = (browserList) => {
     test: /\.js$/,
     exclude: settings.babelLoaderConfig.exclude,
     use: {
-      loader: "babel-loader",
+      loader: require.resolve("babel-loader"),
       options: {
         cacheDirectory: true,
         presets: [
@@ -79,7 +79,7 @@ const configureFontLoader = () => {
     test: /\.(ttf|eot|woff2?)$/i,
     use: [
       {
-        loader: "file-loader",
+        loader: require.resolve("file-loader"),
         options: {
           name: "fonts/[name].[ext]",
         },
@@ -104,7 +104,7 @@ const configureManifest = (fileName) => {
 const configureVueLoader = () => {
   return {
     test: /\.vue$/,
-    loader: "vue-loader",
+    loader: require.resolve("vue-loader"),
   };
 };
 // The base webpack config

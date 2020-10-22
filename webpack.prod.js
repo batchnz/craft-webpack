@@ -62,7 +62,7 @@ const configureImageLoader = (buildType) => {
       test: /\.(png|jpe?g|gif|webp)$/i,
       use: [
         {
-          loader: "file-loader",
+          loader: require.resolve("file-loader"),
           options: {
             name: "img/[name].[hash].[ext]",
           },
@@ -75,13 +75,13 @@ const configureImageLoader = (buildType) => {
       test: /\.(png|jpe?g|gif|webp)$/i,
       use: [
         {
-          loader: "file-loader",
+          loader: require.resolve("file-loader"),
           options: {
             name: "img/[name].[hash].[ext]",
           },
         },
         {
-          loader: "img-loader",
+          loader: require.resolve("img-loader"),
           options: {
             plugins: [
               require("imagemin-gifsicle")({
@@ -112,11 +112,11 @@ const configureSvgLoader = (buildType) => {
       test: /\.svg$/,
       oneOf: [
         {
-          loader: "vue-svg-loader",
+          loader: require.resolve("vue-svg-loader"),
         },
         {
           resourceQuery: /external/,
-          loader: "file-loader",
+          loader: require.resolve("file-loader"),
           query: {
             name: "img/[name].[hash].[ext]",
           },
@@ -129,19 +129,19 @@ const configureSvgLoader = (buildType) => {
       test: /\.svg$/,
       oneOf: [
         {
-          loader: "vue-svg-loader",
+          loader: require.resolve("vue-svg-loader"),
         },
         {
           resourceQuery: /external/,
           use: [
             {
-              loader: "file-loader",
+              loader: require.resolve("file-loader"),
               query: {
                 name: "img/[name].[hash].[ext]",
               },
             },
             {
-              loader: "img-loader",
+              loader: require.resolve("img-loader"),
               options: {
                 plugins: [
                   require("imagemin-svgo")({
@@ -203,17 +203,17 @@ const configurePostcssLoader = (buildType) => {
       use: [
         MiniCssExtractPlugin.loader,
         {
-          loader: "css-loader",
+          loader: require.resolve("css-loader"),
           options: {
             importLoaders: 2,
             sourceMap: true,
           },
         },
         {
-          loader: "resolve-url-loader",
+          loader: require.resolve("resolve-url-loader"),
         },
         {
-          loader: "postcss-loader",
+          loader: require.resolve("postcss-loader"),
           options: {
             sourceMap: true,
           },
@@ -225,7 +225,7 @@ const configurePostcssLoader = (buildType) => {
   if (buildType === MODERN_CONFIG) {
     return {
       test: /\.(pcss|css)$/,
-      loader: "ignore-loader",
+      loader: require.resolve("ignore-loader"),
     };
   }
 };

@@ -61,7 +61,7 @@ const configureSVGLoader = () => {
       {
         oneOf: [
           {
-            loader: "vuerequire.resolve(-svg-loader"),
+            loader: require.resolve("vue-svg-loader"),
           },
           {
             resourceQuery: /^\?external/,
@@ -85,7 +85,7 @@ const configurePostcssLoader = (buildType) => {
         loader: require.resolve("style-loader"),
       },
       {
-        loader: "vuerequire.resolve(-style-loader"),
+        loader: require.resolve("vue-style-loader"),
       },
       {
         loader: require.resolve("css-loader"),
@@ -95,7 +95,7 @@ const configurePostcssLoader = (buildType) => {
         },
       },
       {
-        loader: "resolverequire.resolve(-url-loader"),
+        loader: require.resolve("resolve-url-loader"),
       },
       {
         loader: require.resolve("postcss-loader"),

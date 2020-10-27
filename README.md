@@ -68,6 +68,8 @@ We've tailored this package to our own requirements based on developing a multit
 * [Source Maps](https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)
 * [Modern/Legacy Builds using Browserlist](https://browserl.ist/)
 * [Compression](https://github.com/google/zopfli)
+* [ESLint](https://eslint.org/)
+* [Prettier](https://prettier.io/)
 
 
 <!-- GETTING STARTED -->
@@ -155,6 +157,17 @@ module.exports = {
   }
 };
 ```
+
+### ESLint Config
+
+The base ESLint config is setup with the following:
+- airbnb/base
+- vue/recommended
+- prettier/recommended
+
+By default, ESLint will lint \*.js, \*.vue files in the `src` directory. To change any of the [ESLint plugin options](https://eslint.org/docs/developer-guide/nodejs-api#%E2%97%86-new-eslint-options) simply update the `eslintConfig` key in your `webpack.settings.js` override file.
+
+Alternatively, to just set the linting rules, you can drop an `.eslintrc.js` file as per normal usage in your site root folder.
 
 ### Source Maps**
 

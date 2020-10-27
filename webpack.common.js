@@ -5,9 +5,10 @@ const MODERN_CONFIG = "modern";
 // node modules
 const path = require("path");
 const fs = require("fs");
-const { merge, mergeWithCustomize, customizeObject } = require('webpack-merge');
+const { merge, mergeWithCustomize, customizeObject } = require("webpack-merge");
 
 // webpack plugins
+const ESLintPlugin = require("eslint-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const WebpackNotifierPlugin = require("webpack-notifier");
@@ -15,8 +16,11 @@ const WebpackNotifierPlugin = require("webpack-notifier");
 // config files
 const pkg = require("./package.json");
 let settings = require("./webpack.settings.js");
-if (fs.existsSync(path.resolve(process.cwd(), './webpack.settings.js'))) {
-  let projectSettings = require(path.resolve(process.cwd(), './webpack.settings.js'));
+if (fs.existsSync(path.resolve(process.cwd(), "./webpack.settings.js"))) {
+  let projectSettings = require(path.resolve(
+    process.cwd(),
+    "./webpack.settings.js"
+  ));
   settings = merge(settings, projectSettings);
 }
 
@@ -54,20 +58,14 @@ const configureBabelLoader = (browserList) => {
   };
 };
 
-// Configure eslint loader
-const configureEslintLoader = () => {
-  return {
-    test: /\.js$/,
-    exclude: /node_modules/,
-    use: ["eslint-loader"],
-  };
-};
-
 // Configure Entries
 const configureEntries = () => {
   let entries = {};
   for (const [key, value] of Object.entries(settings.entries)) {
-    entries[key] = path.resolve(settings.paths.working, settings.paths.src.js + value);
+    entries[key] = path.resolve(
+      settings.paths.working,
+      settings.paths.src.js + value
+    );
   }
 
   return entries;
@@ -148,29 +146,31 @@ const modernConfig = {
   module: {
     rules: [
       configureBabelLoader(Object.values(pkg.browserslist.modernBrowsers)),
-      configureEslintLoader(),
     ],
   },
-  plugins: [new ManifestPlugin(configureManifest("manifest.json"))],
+  plugins: [
+    new ESLintPlugin(settings.eslintConfig),
+    new ManifestPlugin(configureManifest("manifest.json")),
+  ],
 };
 
 let legacyMerged = mergeWithCustomize({
   legacyConfig: customizeObject({
-    "module": "prepend",
-    "plugins": "prepend",
-  })
+    module: "prepend",
+    plugins: "prepend",
+  }),
 })(baseConfig, legacyConfig);
 
 let modernMerged = mergeWithCustomize({
   modernConfig: customizeObject({
-    "module": "prepend",
-    "plugins": "prepend",
-  })
+    module: "prepend",
+    plugins: "prepend",
+  }),
 })(baseConfig, modernConfig);
 
 // Common module exports
 // noinspection WebpackConfigHighlighting
 module.exports = {
   legacyConfig: legacyMerged,
-  modernConfig: modernMerged
+  modernConfig: modernMerged,
 };

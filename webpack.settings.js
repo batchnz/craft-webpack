@@ -1,7 +1,7 @@
 // webpack.settings.js - webpack settings config
 
 // node modules
-require("dotenv").config()
+require("dotenv").config();
 
 // Webpack settings exports
 // noinspection WebpackConfigHighlighting
@@ -42,5 +42,28 @@ module.exports = {
   },
   manifestConfig: {
     basePath: "",
+  },
+  eslintConfig: {
+    files: "src",
+    extensions: [".js", ".vue"],
+    baseConfig: {
+      root: true,
+      parser: "vue-eslint-parser",
+      parserOptions: {
+        parser: "babel-eslint",
+        sourceType: "module",
+        ecmaVersion: 2020,
+      },
+      extends: [
+        "airbnb-base",
+        "plugin:vue/recommended",
+        "plugin:prettier/recommended",
+        "prettier/vue",
+      ],
+      env: {
+        node: true,
+        browser: true,
+      },
+    },
   },
 };

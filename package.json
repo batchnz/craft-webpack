@@ -1,6 +1,6 @@
 {
   "name": "@batch/craft-webpack",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "Batch's Webpack setup made for the Craft Starter.",
   "keywords": [
     "Batch",

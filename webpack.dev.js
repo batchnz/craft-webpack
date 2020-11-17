@@ -91,7 +91,7 @@ const configurePostcssLoader = (buildType) => {
         loader: require.resolve("css-loader"),
         options: {
           importLoaders: 2,
-          sourceMap: true,
+          sourceMap: false,
         },
       },
       {
@@ -100,7 +100,7 @@ const configurePostcssLoader = (buildType) => {
       {
         loader: require.resolve("postcss-loader"),
         options: {
-          sourceMap: true,
+          sourceMap: false,
         },
       },
     ],
@@ -116,7 +116,7 @@ const legacyConfig = merge(
       publicPath: settings.devServerConfig.public() + "/",
     },
     mode: "development",
-    devtool: "eval-source-map",
+    devtool: "eval-cheap-module-source-map",
     devServer: configureDevServer(LEGACY_CONFIG),
     module: {
       rules: [
@@ -139,7 +139,7 @@ const modernConfig = merge(
       publicPath: settings.devServerConfig.public() + "/",
     },
     mode: "development",
-    devtool: "eval-source-map",
+    devtool: "eval-cheap-module-source-map",
     devServer: configureDevServer(MODERN_CONFIG),
     module: {
       rules: [

@@ -30,7 +30,14 @@ const configureDevServer = (buildType) => {
     watchContentBase: true,
     watchOptions: {
       poll: !!parseInt(settings.devServerConfig.poll()),
-      ignored: /node_modules/,
+      ignored: [
+        /node_modules/,
+        path.resolve(
+          __dirname,
+          settings.paths.working,
+          settings.paths.templates + "**"
+        ),
+      ],
     },
     headers: {
       "Access-Control-Allow-Origin": "*",
